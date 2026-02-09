@@ -17,10 +17,9 @@ public class Bus extends Transportation {
     }
 
     public Bus(String companyName, String departureCity,
-               String arrivalCity, String busCompany, int numberOfStops) {
+               String arrivalCity, int numberOfStops) {
 
         super(companyName, departureCity, arrivalCity);
-        this.busCompany = busCompany;
         this.numberOfStops = numberOfStops;
     }
 

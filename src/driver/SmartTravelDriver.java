@@ -1,8 +1,7 @@
 package driver;
 
 import client.Client;
-import travel.Flight;
-import travel.Trip;
+import travel.*;
 
 import java.util.Scanner;
 
@@ -41,7 +40,27 @@ public class SmartTravelDriver {
                 Trip trip3 = new Trip("Barcelona", 21, 900, client3);
 
                 //2 Flights
-                Flight flight1 = new Flight("Air Transat", "Montreal", "Miami", 22);
+                Flight flight1 = new Flight("Air Transat", "Montreal", "Fort Laudertale", 22);
+                Flight flight2 = new Flight("Air Canada", "Montreal", "Barcelona", 22);
+
+                //2 Buses
+                Bus bus1 = new Bus("Chartrand", "Fort Laudertale", "Miami", 30);
+                Bus bus2 = new Bus("Irizar", "Barcelona", "Marbella", 12);
+
+                //2 Trains
+                Train train1 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
+                Train train2 = new Train("Trans_Canada", "Montreal", "Vancouver", "TGV", "First Class");
+
+                //2 Hotels
+                Hotel hotel1 = new Hotel("Marriott", "Barcelona", 100, 4);
+                Hotel hotel2 = new Hotel("Hilton", "Miami", 65, 3);
+
+                //2 Hostels
+                Hostel hostel1 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
+                Hostel hostel2 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
+
+                //Arrays for objects
+
             }
         }
 
