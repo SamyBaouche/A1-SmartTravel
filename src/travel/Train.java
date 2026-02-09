@@ -7,6 +7,9 @@ public class Train extends Transportation {
     private String trainType;
     private String seatClass;
 
+    private final static double FIRST_CLASS_PRICE = 250;
+    private final static double ECONOMY_PRICE = 75;
+
     public Train() {
         super();
         this.seatClass = "";
@@ -61,6 +64,15 @@ public class Train extends Transportation {
 
     @Override
     public double calculateCost(int numberOfDays) {
-        return 0;
+
+        double cost = 0;
+
+        if (seatClass.equalsIgnoreCase("Economy")) {
+            cost = ECONOMY_PRICE;
+        } else if (seatClass.equalsIgnoreCase("First Class")) {
+            cost = FIRST_CLASS_PRICE;
+        }
+
+        return cost;
     }
 }

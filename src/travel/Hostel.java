@@ -44,8 +44,9 @@ public class Hostel extends Accommodation {
         return sharedBeds == other.sharedBeds;
     }
 
+    //Same calcul as the hotel but divided by the number of shared beds
     @Override
     public double calculateCost(int numberOfDays) {
-        return 0;
+        return (getPricePerNight() * numberOfDays) / sharedBeds;
     }
 }

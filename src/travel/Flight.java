@@ -7,6 +7,8 @@ public class Flight extends Transportation {
     private String airlineName;
     private double luggageAllowance;
 
+    private final static double BASE_FLIGHT_PRICE = 400;
+
     public Flight() {
         super();
         this.airlineName = "";
@@ -63,6 +65,7 @@ public class Flight extends Transportation {
 
     @Override
     public double calculateCost(int numberOfDays) {
-        return 0;
+        //Implemented luggageAllowance into the cost calcul
+        return BASE_FLIGHT_PRICE + (luggageAllowance * 5);
     }
 }

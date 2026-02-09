@@ -7,6 +7,9 @@ public class Bus extends Transportation {
     private String busCompany;
     private int numberOfStops;
 
+    private final static double DAILY_PASS_PRICE = 5;
+    private final static double DISCOUNT = 0.75;
+
     public Bus() {
         super();
         this.busCompany = "";
@@ -60,6 +63,14 @@ public class Bus extends Transportation {
 
     @Override
     public double calculateCost(int numberOfDays) {
-        return 0;
+        double cost = 0;
+
+        if (numberOfDays > 30) {
+            cost = numberOfDays * DAILY_PASS_PRICE * DISCOUNT;
+        } else {
+            cost = numberOfDays * DAILY_PASS_PRICE;
+        }
+
+        return cost;
     }
 }
