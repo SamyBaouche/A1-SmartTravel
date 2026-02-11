@@ -17,7 +17,7 @@ public class SmartTravelDriver {
         System.out.print("What would you like to access: \n" +
                 "   1- menu-driven interface \n" +
                 "   2- predefined testing scenario \n" +
-                "Enter you choice > ");
+                "Enter your choice > ");
 
         int optionChoice = sc.nextInt();
 
@@ -29,15 +29,16 @@ public class SmartTravelDriver {
             //Predefined testing scenario
             case 2 -> {
 
+                System.out.println("\n      1. Creating... \n" +
+                        "- 3 Clients \n" +
+                        "- 3 Trips \n" +
+                        "- 2 Objects of each Transportation Type \n" +
+                        "- 2 Objects of each Accomodation Type");
+
                 //3 Clients
                 Client client1 = new Client("Jacob", "Delaire", "jacob.delaire@gmail.com");
                 Client client2 = new Client("Nathan", "Blo", "nathan.blo@gmail.com");
-                Client client3 = new Client();
-
-                //3 Trips
-                Trip trip1 = new Trip("Vancouver", 14, 600, client1);
-                Trip trip2 = new Trip("Miami", 10, 400, client2);
-                Trip trip3 = new Trip("Barcelona", 21, 900, client3);
+                Client client3 = new Client("Mohammed", "Baouche", "mohammed.baouche@gmail.com");
 
                 //2 Flights
                 Flight flight1 = new Flight("Air Transat", "Montreal", "Fort Laudertale", 22);
@@ -49,7 +50,7 @@ public class SmartTravelDriver {
 
                 //2 Trains
                 Train train1 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
-                Train train2 = new Train("Trans_Canada", "Montreal", "Vancouver", "TGV", "First Class");
+                Train train2 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
 
                 //2 Hotels
                 Hotel hotel1 = new Hotel("Marriott", "Barcelona", 100, 4);
@@ -59,8 +60,93 @@ public class SmartTravelDriver {
                 Hostel hostel1 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
                 Hostel hostel2 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
 
-                //Arrays for objects
+                //3 Trips
+                Trip trip1 = new Trip("Vancouver", 14, 600, client1, hostel1, train1);
+                Trip trip2 = new Trip("Miami", 10, 400, client2, hotel2, bus1);
+                Trip trip3 = new Trip("Barcelona", 21, 900, client3, hotel1, flight2);
 
+                    //Arrays for objects
+
+                //Clients Array (for 3 clients)
+                Client[] clients = {client1, client2, client3};
+
+                //Trips Array
+                Trip[] trips = {trip1, trip2, trip3};
+
+                //Transportation Array
+                Transportation[] transportations = {train1, train2, bus1, bus2, flight1, flight2};
+
+                //Accomodation Array
+                Accommodation[] accommodations = {hotel1, hotel2, hostel1, hostel2};
+
+                System.out.println("\n      2. Display all created objects\n");
+
+                System.out.println("Clients:");
+                for (Client client: clients) {
+                    System.out.println("    " + client);
+                }
+
+                System.out.println("\nTrips:");
+                for (Trip trip: trips) {
+                    System.out.println("    " + trip);
+                }
+
+                System.out.println("\nTransportation Options:");
+                for (Transportation transportation: transportations) {
+                    System.out.println("    " + transportation);
+                }
+
+                System.out.println("\nAccomodations");
+                for (Accommodation accommodation: accommodations) {
+                    System.out.println("    " + accommodation);
+                }
+
+                System.out.println("\n      3. Test of the equals method:\n");
+                System.out.println("-- Equals of a Flight and a Train");
+                System.out.println(flight1.equals(train1));
+                System.out.println("-- Equals of two Hotels (Different attributes)");
+                System.out.println(hotel1.equals(hotel2));
+                System.out.println("-- Equals of two Trains (Identical attributes)");
+                System.out.println(train1.equals(train2));
+
+                System.out.println("\n      4. Cost of the Trips\n");
+                for (Trip trip: trips) {
+                    System.out.println(trip.getTripId() + ": " + trip.calculateTotalCost() + "$");
+                }
+
+                System.out.println("\n      5. Most expensive Trip\n" );
+                mostExpensiveTrip(trips);
+
+                System.out.println("\n      6. Deep copie of the Transportation Array\n");
+
+                System.out.println("Making the deep copy...\n");
+                Transportation[] transportationsCopy = copyTransportationArray(transportations);
+
+                System.out.println("-- Displaying both Arrays --\n");
+                System.out.println("Original");
+                for (Transportation transportation: transportations) {
+                    System.out.println("    " + transportation);
+                }
+
+                System.out.println("\nCopy");
+                for (Transportation transportation: transportationsCopy) {
+                    System.out.println("    " + transportation);
+                }
+
+                System.out.println("\nModify the copy Array...\n");
+                transportationsCopy[0].setCompanyName("Unknown Company");
+
+                System.out.println("-- Display both Arrays AFTER MODIFICATION --\n");
+
+                System.out.println("Original");
+                for (Transportation transportation: transportations) {
+                    System.out.println("    " + transportation);
+                }
+
+                System.out.println("\nCopy");
+                for (Transportation transportation: transportationsCopy) {
+                    System.out.println("    " + transportation);
+                }
             }
         }
 
@@ -77,5 +163,35 @@ public class SmartTravelDriver {
         return sc.nextInt();
     }
 
-    //Predefined Scenario
+    public static void mostExpensiveTrip(Trip[] trips) {
+        double topPrice = 0;
+
+        Trip mostExpensiveTrip = new Trip();
+
+        for (Trip trip: trips) {
+            double costTrip = trip.calculateTotalCost();
+            if (costTrip > topPrice) {
+                topPrice = costTrip;
+                mostExpensiveTrip = trip;
+            }
+        }
+
+        System.out.println("The most expensive trip is: " + mostExpensiveTrip.getTripId());
+    }
+
+    public static Transportation[] copyTransportationArray(Transportation[] original) {
+        Transportation[] copy = new Transportation[original.length];
+
+        for (int i = 0; i < original.length; i++) {
+            if (original[i] instanceof Flight) {
+                copy[i] = new Flight((Flight) original[i]);
+            } else if (original[i] instanceof Train) {
+                copy[i] = new Train((Train) original[i]);
+            } else if (original[i] instanceof Bus) {
+                copy[i] = new Bus((Bus) original[i]);
+            }
+        }
+
+        return copy;
+    }
 }

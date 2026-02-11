@@ -16,12 +16,14 @@ public class Trip {
 
     private static int tripIdCounter = 2001;
 
-    public Trip(String destination, int durationInDays, double basePrice, Client client) {
+    public Trip(String destination, int durationInDays, double basePrice, Client client, Accommodation accommodation, Transportation transportation) {
         this.tripID = "T" + tripIdCounter++;
         this.destination = destination;
         this.durationInDays = durationInDays;
         this.basePrice = basePrice;
         this.clientAssociated = client;
+        this.accommodation = accommodation;
+        this.transportation = transportation;
     }
 
     public Trip () {
@@ -29,6 +31,8 @@ public class Trip {
         this.destination = "";
         this.durationInDays = 0;
         this.basePrice = 0;
+        this.accommodation = null;
+        this.transportation = null;
     }
 
 
@@ -53,6 +57,26 @@ public class Trip {
         }
 
         return cost;
+    }
+
+    @Override
+    public String toString() {
+
+        String tripText = "Trip [" +
+                "ID='" + tripID + '\'' +
+                ", Destination: '" + destination +
+                ", DurationInDays: " + durationInDays +
+                ", BasePrice: " + basePrice + "$" +
+                ", ClientAssociated: " + clientAssociated.getClientId();
+
+        if (transportation != null)
+            tripText += ", Transportation: " + transportation.getTransportId();
+        if (accommodation != null)
+            tripText += ", Accommodation: " + accommodation.getAccommodationId();
+
+        tripText += ']';
+
+        return tripText;
     }
 
     public String getTripId() {

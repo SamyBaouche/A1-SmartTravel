@@ -85,7 +85,6 @@ public abstract class Accommodation {
         if (o == null || getClass() != o.getClass()) return false;
         Accommodation other = (Accommodation) o;
         return Double.compare(pricePerNight, other.pricePerNight) == 0
-                && Objects.equals(accommodationId, other.accommodationId)
                 && Objects.equals(name, other.name)
                 && Objects.equals(location, other.location);
     }
