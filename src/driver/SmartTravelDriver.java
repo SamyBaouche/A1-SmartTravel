@@ -22,10 +22,67 @@ public class SmartTravelDriver {
         int optionChoice = sc.nextInt();
 
         switch (optionChoice) {
+
             //Menu driven interface
             case 1 -> {
 
+                Client[] clients = new Client[0];
+                Transportation[] transportations = new Transportation[0];
+                Accommodation[] accommodations = new Accommodation[0];
+                Trip[] trips = new Trip[0];
+
+                int choiceMenu = mainMenu();
+
+                switch (choiceMenu) {
+                    case 1 -> {
+                        int choice;
+                        do {
+                            System.out.println("-- Client Management --\n");
+                            System.out.println("1. Add a client\n" +
+                                    "2. Edit a client\n" +
+                                    "3. Delete a client\n" +
+                                    "4. List all clients\n" +
+                                    "0. Exit to main menu");
+
+                            choice = sc.nextInt();
+                        } while (choice < 0 || choice > 4);
+
+                        switch (choice) {
+                            case 1 -> {
+                                System.out.print("Enter client First Name: ");
+                                String firstName = sc.nextLine();
+                                System.out.println("Enter client Last Name: ");
+                                String lastName = sc.nextLine();
+                                System.out.println("Enter client email: ");
+                                String email = sc.nextLine();
+
+                                Client client = new Client(firstName, lastName, email);
+
+                                Client[] clientProcess = new Client[clients.length + 1];
+
+                                if (clients.length > 0) {
+                                    for (int i = 0; i < clients.length; i++) {
+                                        clientProcess[i] = clients[i];
+                                    }
+                                }
+
+                                clientProcess[clientProcess.length - 1] = client;
+                                clients = clientProcess;
+
+                                mainMenu();
+                            }
+
+                            case 2 -> {
+                                System.out.println("");
+                            }
+
+
+                        }
+                    }
+                }
+
             }
+
             //Predefined testing scenario
             case 2 -> {
 
@@ -152,15 +209,22 @@ public class SmartTravelDriver {
 
     }
 
-    public int mainMenu() {
-        System.out.println("-- Choose one of the operations below -- ");
-        System.out.println();
-        System.out.println("1. Client Management");
-        System.out.println("2. Trip Management");
-        System.out.println("3. Transportation Management");
-        System.out.println("4. Accomodation Management");
+    public static int mainMenu() {
 
-        return sc.nextInt();
+        int choice;
+
+        do {
+            System.out.println("-- Choose one of the operations below -- ");
+            System.out.println();
+            System.out.println("1. Client Management");
+            System.out.println("2. Trip Management");
+            System.out.println("3. Transportation Management");
+            System.out.println("4. Accomodation Management");
+
+            choice = sc.nextInt();
+        } while (choice < 1 || choice > 4);
+
+        return choice;
     }
 
     public static void mostExpensiveTrip(Trip[] trips) {
