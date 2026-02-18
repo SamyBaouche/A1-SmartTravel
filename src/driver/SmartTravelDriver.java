@@ -544,8 +544,6 @@ public class SmartTravelDriver {
 
     public static void createTrip() {
 
-        int clientsCount = 0;
-
         System.out.print("Enter your destination: ");
         String destination = sc.nextLine();
 
@@ -555,12 +553,53 @@ public class SmartTravelDriver {
         System.out.print("Enter base price: ");
         double price = sc.nextDouble();
 
-        if (clientsCount == 0) {
-            System.out.println("No client has been created. Please create a new client.");
+        Client client = new Client();
+        Accommodation accommodation;
+
+
+        if (clients.length != 0) {
+            System.out.println("Choose which client you want to associate this trip to");
+            for (int i = 0; i < clients.length; i++) {
+                System.out.println(i + ". " + clients[i]);
+            }
+
+            System.out.print("> ");
+            int choice = sc.nextInt();
+
+            client = clients[choice];
+        } else {
+            System.out.println("No client to associate please create one and add it to the trip later");
         }
 
+        if (accommodations.length != 0) {
+            System.out.println("Choose which transportation you want to associate this trip to");
+            for (int i = 0; i < accommodations.length; i++) {
+                System.out.println(i + ". " + accommodations[i]);
+            }
+
+            System.out.print("> ");
+            int choice = sc.nextInt();
 
 
+        } else {
+            System.out.println("No transportation to associate please create one and add it to the trip later");
+        }
+
+        if (transportations.length != 0) {
+            System.out.println("Choose which transportation you want to associate this trip to");
+            for (int i = 0; i < transportations.length; i++) {
+                System.out.println(i + ". " + transportations[i]);
+            }
+
+            System.out.print("> ");
+            int choice = sc.nextInt();
+
+            Transportation transportation = transportations[choice];
+        } else {
+            System.out.println("No transportation to associate please create one and add it to the trip later");
+        }
+
+        //Trip trip = new Trip (destination, daysDuration, price, client, accomodation, transportation);
 
 
     }

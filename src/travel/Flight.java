@@ -56,6 +56,6 @@ public class Flight extends Transportation {
     @Override
     public double calculateCost(int numberOfDays) {
         //Implemented luggageAllowance into the cost calcul
-        return BASE_FLIGHT_PRICE + (luggageAllowance * 5);
+        return BASE_FLIGHT_PRICE + (luggageAllowance * 1);
     }
 }
