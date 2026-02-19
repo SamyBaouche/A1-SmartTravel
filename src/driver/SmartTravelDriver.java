@@ -11,11 +11,19 @@ public class SmartTravelDriver {
     static Scanner sc = new Scanner(System.in);
 
     static Client[] clients = new Client[0];
-    static Transportation[] transportations = new Transportation[1000];
-    static Accommodation[] accommodations = new Accommodation[1000];
+    //static Transportation[] transportations = new Transportation[0];
+    //static Accommodation[] accommodations = new Accommodation[0];
+
+    // Array size 0
+    static Transportation[] transportations = new Transportation[0];
+
+    // Array with 1 Hotel and 1 Hostel
+    static Accommodation[] accommodations = new Accommodation[] {
+            new Hotel("Marriott", "Barcelona", 100, 4),
+            new Hostel("SleepInPeace", "Vancouver", 90, 3)
+    };
+
     static Trip[] trips = new Trip[0];
-    static int accommodationCount = 0;
-    static int transportationCount = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -446,16 +454,12 @@ public class SmartTravelDriver {
                     smallerClient = new Client[0];
                 } else {
                     smallerClient = new Client[clients.length - 1];
+
                     int compteur = 0;
 
                     for (int i = 0; i < clients.length; i++) {
                         if (i != choice) {
-                            smallerClient[compteur] = clients[i];
-                            compteur++;
-                        } else {
-                            i++;
-                            smallerClient[compteur] = clients[i];
-                            i--;
+                            smallerClient[compteur++] = clients[i];
                         }
                     }
                 }
@@ -876,56 +880,31 @@ public class SmartTravelDriver {
 
     public static void removeTransportation() {
 
-        if (transportationCount == 0) {
+        if (transportations.length == 0) {
             System.out.println("There are no transportation options to remove.");
             return;
         }
 
-        System.out.println("\nSelect a Transportation type to remove:");
-        System.out.println("1- Flight");
-        System.out.println("2- Train");
-        System.out.println("3- Bus");
-        System.out.print("> ");
+        int choice;
 
-        int type = sc.nextInt();
+        do {
+            System.out.println("Which transportation option do you want to delete?");
+            for (int i = 0; i < transportations.length; i++) {
+                System.out.println(i + ". " + transportations[i]);
+            }
+            choice = sc.nextInt();
+        } while (choice < 0 || choice > transportations.length - 1);
 
-        // Display only chosen type
-        System.out.println("\nAvailable options:");
+        Transportation[] copyTransportations = new Transportation[transportations.length - 1];
 
-        int[] indexes = new int[transportationCount];
-        int count = 0;
-
-        for (int i = 0; i < transportationCount; i++) {
-
-            if ((type == 1 && transportations[i] instanceof Flight) ||
-                    (type == 2 && transportations[i] instanceof Train) ||
-                    (type == 3 && transportations[i] instanceof Bus)) {
-
-                System.out.println(count + ". " + transportations[i]);
-                indexes[count] = i;
-                count++;
+        int compteur = 0;
+        for (int i = 0; i < transportations.length; i++) {
+            if (i != choice) {
+                copyTransportations[compteur++] = transportations[i];
             }
         }
 
-        if (count == 0) {
-            System.out.println("No transportation of this type found.");
-            return;
-        }
-
-        System.out.print("> ");
-        int choice = sc.nextInt();
-
-        if (choice < 0 || choice >= count) {
-            System.out.println("Invalid index.");
-            return;
-        }
-
-        int realIndex = indexes[choice];
-
-        // Swap with last (COMP249 standard)
-        transportations[realIndex] = transportations[transportationCount - 1];
-        transportations[transportationCount - 1] = null;
-        transportationCount--;
+        transportations = copyTransportations;
 
         System.out.println("Transportation removed successfully.");
     }
@@ -1014,28 +993,32 @@ public class SmartTravelDriver {
 
     public static void removeAccommodation() {
 
-        if (accommodationCount == 0) {
-            System.out.println("There are no accommodations to remove.");
+        if (accommodations.length == 0) {
+            System.out.println("There are no accommodation options to remove.");
             return;
         }
 
-        System.out.println("\nWhich accommodation do you want to remove?");
+        int choice;
 
-        for (int i = 0; i < accommodationCount; i++) {
-            System.out.println(i + ". " + accommodations[i]);
+        do {
+            System.out.println("Which transportation option do you want to delete?");
+            for (int i = 0; i < accommodations.length; i++) {
+                System.out.println(i + ". " + accommodations[i]);
+            }
+            choice = sc.nextInt();
+        } while (choice < 0 || choice > accommodations.length - 1);
+
+        Accommodation[] copyAccommodations = new Accommodation[accommodations.length - 1];
+
+        int compteur = 0;
+
+        for (int i = 0; i < accommodations.length; i++) {
+            if (i != choice) {
+                copyAccommodations[compteur++] = accommodations[i];
+            }
         }
 
-        System.out.print("> ");
-        int index = sc.nextInt();
-
-        if (index < 0 || index >= accommodationCount) {
-            System.out.println("Invalid index.");
-            return;
-        }
-
-        accommodations[index] = accommodations[accommodationCount - 1];
-        accommodations[accommodationCount - 1] = null;
-        accommodationCount--;
+        accommodations = copyAccommodations;
 
         System.out.println("Accommodation removed successfully.");
 
