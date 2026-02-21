@@ -3,7 +3,6 @@ package driver;
 import client.Client;
 import travel.*;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -16,10 +15,15 @@ public class SmartTravelDriver {
 
     static Scanner sc = new Scanner(System.in);
 
-    static Client[] clients = new Client[0];
+    static Client[] clients = new Client[] {
+            new Client("momo", "elbn", "m.elbn@gmail.com")
+    };
 
     // Array size 0
-    static Transportation[] transportations = new Transportation[0];
+    static Transportation[] transportations = new Transportation[] {
+            new Flight("Air Canada", "Laval", "Vancouver", 22),
+            new Train("Train", "Laval", "Mtl", "Bullet", "Economy")
+    };
 
     // Array with 1 Hotel and 1 Hostel
     static Accommodation[] accommodations = new Accommodation[] {
@@ -35,7 +39,7 @@ public class SmartTravelDriver {
      * Main driver class for Smart Travel Planner application.
      * Handles user interaction via menu or predefined scenario.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         System.out.println();
         System.out.println("Welcome to SmartTravelPlanner by: \n" +
@@ -83,7 +87,6 @@ public class SmartTravelDriver {
                             additionalOperations();
                         }
 
-
                         case 0 -> {
                             System.out.println("Thank you for using our Smart Travel Planner");
                         }
@@ -94,125 +97,7 @@ public class SmartTravelDriver {
 
             //Predefined testing scenario
             case 2 -> {
-
-                System.out.println("\n      1. Creating... \n" +
-                        "- 3 Clients \n" +
-                        "- 3 Trips \n" +
-                        "- 2 Objects of each Transportation Type \n" +
-                        "- 2 Objects of each Accomodation Type");
-
-                //3 Clients
-                Client client1 = new Client("Jacob", "Delaire", "jacob.delaire@gmail.com");
-                Client client2 = new Client("Nathan", "Blo", "nathan.blo@gmail.com");
-                Client client3 = new Client("Mohammed", "Baouche", "mohammed.baouche@gmail.com");
-
-                //2 Flights
-                Flight flight1 = new Flight("Air Transat", "Montreal", "Fort Laudertale", 22);
-                Flight flight2 = new Flight("Air Canada", "Montreal", "Barcelona", 22);
-
-                //2 Buses
-                Bus bus1 = new Bus("Chartrand", "Fort Laudertale", "Miami", 30);
-                Bus bus2 = new Bus("Irizar", "Barcelona", "Marbella", 12);
-
-                //2 Trains
-                Train train1 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
-                Train train2 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
-
-                //2 Hotels
-                Hotel hotel1 = new Hotel("Marriott", "Barcelona", 100, 4);
-                Hotel hotel2 = new Hotel("Hilton", "Miami", 65, 3);
-
-                //2 Hostels
-                Hostel hostel1 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
-                Hostel hostel2 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
-
-                //3 Trips
-                Trip trip1 = new Trip("Vancouver", 14, 600, client1, hostel1, train1);
-                Trip trip2 = new Trip("Miami", 10, 400, client2, hotel2, bus1);
-                Trip trip3 = new Trip("Barcelona", 21, 900, client3, hotel1, flight2);
-
-                    //Arrays for objects
-
-                //Clients Array (for 3 clients)
-                Client[] clientsPredef = {client1, client2, client3};
-
-                //Trips Array
-                Trip[] tripsPredef = {trip1, trip2, trip3};
-
-                //Transportation Array
-                Transportation[] transportationsPredef = {train1, train2, bus1, bus2, flight1, flight2};
-
-                //Accomodation Array
-                Accommodation[] accommodationsPredef = {hotel1, hotel2, hostel1, hostel2};
-
-                System.out.println("\n      2. Display all created objects\n");
-
-                System.out.println("Clients:");
-                for (Client client: clientsPredef) {
-                    System.out.println("    " + client);
-                }
-
-                System.out.println("\nTrips:");
-                for (Trip trip: tripsPredef) {
-                    System.out.println("    " + trip);
-                }
-
-                System.out.println("\nTransportation Options:");
-                for (Transportation transportation: transportationsPredef) {
-                    System.out.println("    " + transportation);
-                }
-
-                System.out.println("\nAccommodations");
-                for (Accommodation accommodation: accommodationsPredef) {
-                    System.out.println("    " + accommodation);
-                }
-
-                System.out.println("\n      3. Test of the equals method:\n");
-                System.out.println("-- Equals of a Flight and a Train");
-                System.out.println(flight1.equals(train1));
-                System.out.println("-- Equals of two Hotels (Different attributes)");
-                System.out.println(hotel1.equals(hotel2));
-                System.out.println("-- Equals of two Trains (Identical attributes)");
-                System.out.println(train1.equals(train2));
-
-                System.out.println("\n      4. Cost of the Trips\n");
-                for (Trip trip: tripsPredef) {
-                    System.out.println(trip.getTripId() + ": " + trip.calculateTotalCost() + "$");
-                }
-
-                System.out.println("\n      5. Most expensive Trip\n" );
-                mostExpensiveTrip(tripsPredef);
-
-                System.out.println("\n      6. Deep copie of the Transportation Array\n");
-
-                System.out.println("Making the deep copy...\n");
-                Transportation[] transportationsCopy = copyTransportationArray(transportationsPredef);
-
-                System.out.println("-- Displaying both Arrays --\n");
-                System.out.println("Original");
-                for (Transportation transportation: transportationsPredef) {
-                    System.out.println("    " + transportation);
-                }
-
-                System.out.println("\nCopy");
-                for (Transportation transportation: transportationsCopy) {
-                    System.out.println("    " + transportation);
-                }
-
-                System.out.println("\nModify the copy Array...\n");
-                transportationsCopy[0].setCompanyName("Unknown Company");
-
-                System.out.println("-- Display both Arrays AFTER MODIFICATION --\n");
-
-                System.out.println("Original");
-                for (Transportation transportation: transportationsPredef) {
-                    System.out.println("    " + transportation);
-                }
-
-                System.out.println("\nCopy");
-                for (Transportation transportation: transportationsCopy) {
-                    System.out.println("    " + transportation);
-                }
+                predefinedScenario();
             }
         }
 
@@ -345,71 +230,8 @@ public class SmartTravelDriver {
                 displayClients();
             }
 
-            case 0 -> {
-                mainMenu();
-            }
+            case 0 -> {}
         }
-    }
-
-    /**
-     * additionalOperations(): Menu for extra operations outside the main CRUD menus.
-     * Options:
-     * 1 - Display the most expensive trip
-     * 2 - Calculate and display total cost of a specific trip
-     * 3 - Create a deep copy of the transportation array
-     * 4 - Create a deep copy of the accommodation array
-     */
-
-    public static void additionalOperations() {
-
-        int choice;
-
-        do {
-            System.out.println("-- Additional Operations --\n");
-            System.out.println("1. Display the most expensive trip\n" +
-                    "2. Calculate and display the total cost of a trip\n" +
-                    "3. Create a deep copy of the transportation array\n" +
-                    "4. Create a deep copy of the accomodation array");
-            System.out.print("> ");
-
-            choice = sc.nextInt();
-            sc.nextLine();
-
-            switch (choice) {
-                case 1 -> {
-                    mostExpensiveTrip(trips);
-                } case 2 -> {
-                    totalCostOfATrip(trips);
-                } case 3 -> {
-
-                    if (transportations.length != 0) {
-                        Transportation[] copyTransportations = copyTransportationArray(transportations);
-
-                        System.out.println("Here is the deep copy of the transportation array");
-                        for (Transportation transportation : copyTransportations) {
-                            System.out.println(transportation);
-                        }
-                    } else {
-                        System.out.println("There are no transportations to copy");
-                    }
-
-                } case 4 -> {
-
-                    if (accommodations.length != 0) {
-                        Accommodation[] copyAccommodations = copyAccommodationArray(accommodations);
-
-                        System.out.println("Here is the deep copy of the accomodation array");
-                        for (Accommodation accommodation : copyAccommodations) {
-                            System.out.println(accommodation);
-                        }
-                    } else {
-                        System.out.println("There are no accomodations to copy");
-                    }
-
-                }
-            }
-
-        } while (choice < 0 || choice > 4);
     }
 
     /**
@@ -446,17 +268,7 @@ public class SmartTravelDriver {
         if (clients.length == 0) {
             System.out.println("There is no client to edit.");
         } else {
-            int choice;
-
-            do {
-                System.out.println("Which client do you want to edit:");
-                displayClients();
-
-                System.out.println(clients.length + ". Exit");
-
-                choice = sc.nextInt();
-                sc.nextLine();
-            } while (choice < 0 || choice > clients.length);
+            int choice = choiceCheckClient("edit", true);
 
             if (choice != clients.length) {
 
@@ -484,16 +296,7 @@ public class SmartTravelDriver {
         if (clients.length == 0) {
             System.out.println("There is no client to delete.");
         } else {
-            int choice;
-
-            do {
-                System.out.println("Which client do you want to delete");
-                displayClients();
-
-                System.out.println(clients.length + ". Exit");
-
-                choice = sc.nextInt();
-            } while (choice < 0 || choice > clients.length);
+            int choice = choiceCheckClient("delete", true);
 
             if (choice != clients.length) {
 
@@ -533,29 +336,6 @@ public class SmartTravelDriver {
     }
 
     /**
-     * totalCostOfATrip(Trip[] trips):
-     * Allows the user to select a trip and calculates its total cost.
-     * The cost is calculated using the Trip object's calculateTotalCost() method.
-     * If no trips exist, informs the user.
-     */
-    public static void totalCostOfATrip(Trip[] trips) {
-        if (trips.length == 0) {
-            System.out.println("There is no trip stored.");
-        } else {
-            int choice;
-            do {
-                System.out.println("Which trip do you want to calculate the cost of? :");
-                for (int i = 0; i < trips.length; i++) {
-                    System.out.println((i + 1) + ". " + trips[i].getTripId());
-                }
-                choice = sc.nextInt();
-            } while (choice < 1 || choice > trips.length);
-
-            System.out.println("Total cost of trip [" + trips[choice - 1].getTripId() + "]" + trips[choice -1].calculateTotalCost());
-        }
-    }
-
-    /**
      * tripManagement(): Displays the trip management menu.
      * Options allow creating, editing, canceling, listing trips, or returning to main menu.
      */
@@ -581,7 +361,7 @@ public class SmartTravelDriver {
             }
 
             case 2 -> {
-               editTripInformation();
+                editTripInformation();
             }
 
             case 3-> {
@@ -596,9 +376,7 @@ public class SmartTravelDriver {
                 listAllTripsByClient();
             }
 
-            case 0 -> {
-                mainMenu();
-            }
+            case 0 -> {}
 
         }
 
@@ -627,16 +405,7 @@ public class SmartTravelDriver {
         Client client = new Client();
 
         if (clients.length != 0) {
-            int choice;
-            do {
-                System.out.println("Choose which client you want to associate this trip to");
-                for (int i = 0; i < clients.length; i++) {
-                    System.out.println(i + ". " + clients[i]);
-                }
-
-                System.out.print("> ");
-                choice = sc.nextInt();
-            } while (choice < 0 || choice > clients.length - 1);
+            int choice = choiceCheckClient("associate to the trip", false);
 
             client = clients[choice];
         } else {
@@ -644,36 +413,15 @@ public class SmartTravelDriver {
         }
 
         if (accommodations.length != 0) {
-            int choice;
-            do {
-                System.out.println("Choose which accommodation you want to associate this trip to");
-                for (int i = 0; i < accommodations.length; i++) {
-                    if(accommodations[i] != null)
-                        System.out.println(i + ". " + accommodations[i]);
-                }
-
-                System.out.print("> ");
-                choice = sc.nextInt();
-            } while (choice < 0 || choice > accommodations.length - 1);
+            int choice = choiceCheckAccommodation("associate to the trip", false);
 
             accomodation = accommodations[choice];
-
         } else {
             System.out.println("No accommodation to associate please create one and add it to the trip later");
         }
 
         if (transportations.length != 0) {
-            int choice;
-            do {
-                System.out.println("Choose which transportation you want to associate this trip to");
-                for (int i = 0; i < transportations.length; i++) {
-                    if (transportations[i] != null)
-                        System.out.println(i + ". " + transportations[i]);
-                }
-
-                System.out.print("> ");
-                choice = sc.nextInt();
-            } while (choice < 0 || choice > transportations.length - 1);
+            int choice = choiceCheckTransportation("associate to the trip", false);
 
             transportation = transportations[choice];
         } else {
@@ -701,64 +449,44 @@ public class SmartTravelDriver {
      */
     public static void editTripInformation() {
         if (trips.length != 0) {
-            int choice;
+            int choice = choiceCheckTrip("edit", true);
 
-            do {
-                System.out.println("Which trip do you want to edit");
-                for (int i = 0; i < trips.length; i++) {
-                    System.out.println(i + ". " + trips[i]);
+            if (choice != trips.length) {
+
+                System.out.print("Enter the new destination > ");
+                String destination = sc.nextLine();
+
+                System.out.print("Enter the new duration in days > ");
+                int duration = sc.nextInt();
+
+                System.out.print("Enter the new price > ");
+                double price = sc.nextDouble();
+
+                int choiceAccommodation = 0;
+                int choiceTransportation = 0;
+
+                if (accommodations.length != 0) {
+                    choiceAccommodation = choiceCheckAccommodation("associate to the trip", false);
+                } else {
+                    System.out.println("No accommodation registered add one and try again");
                 }
-                choice = sc.nextInt();
-                sc.nextLine();
-            } while (choice < 0 || choice > trips.length - 1);
 
-            System.out.print("Enter the new destination > ");
-            String destination = sc.nextLine();
+                if (transportations.length != 0) {
+                    choiceTransportation = choiceCheckTransportation("associate to the trip", false);
+                } else {
+                    System.out.println("No transportation registered add one and try again");
+                }
 
-            System.out.print("Enter the new duration in days > ");
-            int duration = sc.nextInt();
+                trips[choice].setDestination(destination);
+                trips[choice].setDurationInDays(duration);
+                trips[choice].setBasePrice(price);
+                if (choiceAccommodation != accommodations.length && choiceTransportation != transportations.length) {
+                    trips[choice].setAccommodation(accommodations[choiceAccommodation]);
+                    trips[choice].setTransportation(transportations[choiceTransportation]);
+                }
 
-            System.out.print("Enter the new price > ");
-            double price = sc.nextDouble();
-
-            int choiceAccommodation = 0;
-            int choiceTransportation = 0;
-
-            if (accommodations.length != 0) {
-                do {
-                    System.out.println("Choose the new accommodation");
-                       for (int i = 0; i < accommodations.length; i++) {
-                           if (accommodations[i] != null)
-                            System.out.println(i + ". " + accommodations[i]);
-                       }
-                       System.out.print("> ");
-                       choiceAccommodation = sc.nextInt();
-                } while (choiceAccommodation < 0 || choiceAccommodation > accommodations.length - 1);
-            } else {
-                System.out.println("No accommodation registered add one and try again");
+                System.out.println("Trip edited successfully");
             }
-
-            if (transportations.length != 0) {
-                do {
-                    System.out.println("Choose the new transportation");
-                    for (int i = 0; i < transportations.length; i++) {
-                        if (transportations[i] != null)
-                            System.out.println(i + ". " + transportations[i]);
-                    }
-                    System.out.print("> ");
-                    choiceTransportation = sc.nextInt();
-                } while (choiceTransportation < 0 || choiceTransportation > transportations.length - 1);
-            } else {
-                System.out.println("No transportation registered add on and try again");
-            }
-
-            trips[choice].setDestination(destination);
-            trips[choice].setDurationInDays(duration);
-            trips[choice].setBasePrice(price);
-            trips[choice].setAccommodation(accommodations[choiceAccommodation]);
-            trips[choice].setTransportation(transportations[choiceTransportation]);
-
-            System.out.println("Trip edited successfully");
 
         } else {
             System.out.println("No trips to edit");
@@ -771,30 +499,25 @@ public class SmartTravelDriver {
      */
     public static void cancelTrip() {
         if (trips.length != 0) {
-            int choice;
-            System.out.println("Which trip do you want to cancel");
-            do {
-                for (int i = 0; i < trips.length; i++) {
-                    System.out.println(i + ". " + trips[i]);
-                }
-                System.out.print("> ");
-                choice = sc.nextInt();
-            } while (choice < 0 || choice > trips.length);
+            int choice = choiceCheckTrip("cancel", true);
 
             Trip[] tripCopy = new Trip[trips.length - 1];
 
-            if (tripCopy.length != 0) {
-                int tripCopyCompteur = 0;
-                for (int i = 0; i < trips.length; i++) {
-                    if (i != choice) {
-                        tripCopy[tripCopyCompteur] = trips[i];
-                        tripCopyCompteur++;
-                    }
-                }
+            if (choice != trips.length) {
 
-                trips = tripCopy;
-            } else {
-                trips = null;
+                if (tripCopy.length != 0) {
+                    int tripCopyCompteur = 0;
+                    for (int i = 0; i < trips.length; i++) {
+                        if (i != choice) {
+                            tripCopy[tripCopyCompteur] = trips[i];
+                            tripCopyCompteur++;
+                        }
+                    }
+
+                    trips = tripCopy;
+                } else {
+                    trips = new Trip[0];
+                }
             }
         } else {
             System.out.println("No trip to cancel");
@@ -806,8 +529,8 @@ public class SmartTravelDriver {
      */
     public static void listAllTrips() {
         if (trips.length != 0) {
-            for (Trip trip: trips) {
-                System.out.println(trip);
+            for (int i = 0; i < trips.length; i++) {
+                System.out.println(i + ". " + trips[i]);
             }
         } else {
             System.out.println("No trips to list");
@@ -819,19 +542,13 @@ public class SmartTravelDriver {
      */
     public static void listAllTripsByClient() {
         if (trips.length != 0) {
-            int choice;
-            do {
-                System.out.println("Choose the specific client");
-                for (int i = 0; i < clients.length; i++) {
-                    System.out.println(i + ". " + clients[i]);
-                }
-                System.out.print("> ");
-                choice = sc.nextInt();
-            } while (choice < 0 || choice > trips.length - 1);
+            int choice = choiceCheckClient("see the trips of", true);
 
-            for (Trip trip: trips) {
-                if (trip.getClientAssociated() == clients[choice]) {
-                    System.out.println(trip);
+            if (choice != trips.length) {
+                for (Trip trip : trips) {
+                    if (trip.getClientAssociated() == clients[choice]) {
+                        System.out.println(trip);
+                    }
                 }
             }
 
@@ -872,10 +589,7 @@ public class SmartTravelDriver {
                 listTransportationOptions();
             }
 
-            case 0 -> {
-                mainMenu();
-
-            }
+            case 0 -> {}
         }
     }
 
@@ -980,28 +694,23 @@ public class SmartTravelDriver {
             return;
         }
 
-        int choice;
+        int choice = choiceCheckTransportation("remove", true);
 
-        do {
-            System.out.println("Which transportation option do you want to delete?");
+        if (choice != transportations.length) {
+
+            Transportation[] copyTransportations = new Transportation[transportations.length - 1];
+
+            int compteur = 0;
             for (int i = 0; i < transportations.length; i++) {
-                System.out.println(i + ". " + transportations[i]);
+                if (i != choice) {
+                    copyTransportations[compteur++] = transportations[i];
+                }
             }
-            choice = sc.nextInt();
-        } while (choice < 0 || choice > transportations.length - 1);
 
-        Transportation[] copyTransportations = new Transportation[transportations.length - 1];
+            transportations = copyTransportations;
 
-        int compteur = 0;
-        for (int i = 0; i < transportations.length; i++) {
-            if (i != choice) {
-                copyTransportations[compteur++] = transportations[i];
-            }
+            System.out.println("Transportation removed successfully.");
         }
-
-        transportations = copyTransportations;
-
-        System.out.println("Transportation removed successfully.");
     }
 
     /**
@@ -1035,10 +744,7 @@ public class SmartTravelDriver {
                 listAccommodationByType();
             }
 
-            case 0 -> {
-                mainMenu();
-
-            }
+            case 0 -> {}
         }
     }
 
@@ -1103,29 +809,24 @@ public class SmartTravelDriver {
             return;
         }
 
-        int choice;
+        int choice = choiceCheckAccommodation("remove", true);
 
-        do {
-            System.out.println("Which transportation option do you want to delete?");
+        if (choice != accommodations.length) {
+
+            Accommodation[] copyAccommodations = new Accommodation[accommodations.length - 1];
+
+            int compteur = 0;
+
             for (int i = 0; i < accommodations.length; i++) {
-                System.out.println(i + ". " + accommodations[i]);
+                if (i != choice) {
+                    copyAccommodations[compteur++] = accommodations[i];
+                }
             }
-            choice = sc.nextInt();
-        } while (choice < 0 || choice > accommodations.length - 1);
 
-        Accommodation[] copyAccommodations = new Accommodation[accommodations.length - 1];
+            accommodations = copyAccommodations;
 
-        int compteur = 0;
-
-        for (int i = 0; i < accommodations.length; i++) {
-            if (i != choice) {
-                copyAccommodations[compteur++] = accommodations[i];
-            }
+            System.out.println("Accommodation removed successfully.");
         }
-
-        accommodations = copyAccommodations;
-
-        System.out.println("Accommodation removed successfully.");
 
     }
 
@@ -1135,17 +836,357 @@ public class SmartTravelDriver {
     public static void listAccommodationByType() {
 
         if (accommodations.length != 0) {
+            System.out.println("--- Hotels ---");
             for (Accommodation a : accommodations) {
                 if (a instanceof Hotel)
                     System.out.println(a);
             }
 
+            System.out.println("--- Hostels ---");
             for (Accommodation a : accommodations) {
                 if (a instanceof Hostel) System.out.println(a);
             }
         } else {
             System.out.println("There are no accommodations to list.");
         }
+    }
+
+    /**
+     * additionalOperations(): Menu for extra operations outside the main CRUD menus.
+     * Options:
+     * 1 - Display the most expensive trip
+     * 2 - Calculate and display total cost of a specific trip
+     * 3 - Create a deep copy of the transportation array
+     * 4 - Create a deep copy of the accommodation array
+     */
+
+    public static void additionalOperations() {
+
+        int choice;
+
+        do {
+            System.out.println("-- Additional Operations --\n");
+            System.out.println("1. Display the most expensive trip\n" +
+                    "2. Calculate and display the total cost of a trip\n" +
+                    "3. Create a deep copy of the transportation array\n" +
+                    "4. Create a deep copy of the accomodation array");
+            System.out.print("> ");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1 -> {
+                    mostExpensiveTrip(trips);
+                } case 2 -> {
+                    totalCostOfATrip(trips);
+                } case 3 -> {
+
+                    if (transportations.length != 0) {
+                        Transportation[] copyTransportations = copyTransportationArray(transportations);
+
+                        System.out.println("Here is the deep copy of the transportation array");
+                        for (Transportation transportation : copyTransportations) {
+                            System.out.println(transportation);
+                        }
+                    } else {
+                        System.out.println("There are no transportations to copy");
+                    }
+
+                } case 4 -> {
+
+                    if (accommodations.length != 0) {
+                        Accommodation[] copyAccommodations = copyAccommodationArray(accommodations);
+
+                        System.out.println("Here is the deep copy of the accomodation array");
+                        for (Accommodation accommodation : copyAccommodations) {
+                            System.out.println(accommodation);
+                        }
+                    } else {
+                        System.out.println("There are no accomodations to copy");
+                    }
+
+                }
+            }
+
+        } while (choice < 0 || choice > 4);
+    }
+
+    /**
+     * totalCostOfATrip(Trip[] trips):
+     * Allows the user to select a trip and calculates its total cost.
+     * The cost is calculated using the Trip object's calculateTotalCost() method.
+     * If no trips exist, informs the user.
+     */
+    public static void totalCostOfATrip(Trip[] trips) {
+        if (trips.length == 0) {
+            System.out.println("There is no trip stored.");
+        } else {
+            int choice;
+            do {
+                System.out.println("Which trip do you want to calculate the cost of? :");
+                for (int i = 0; i < trips.length; i++) {
+                    System.out.println((i + 1) + ". " + trips[i].getTripId());
+                }
+                choice = sc.nextInt();
+            } while (choice < 1 || choice > trips.length);
+
+            System.out.println("Total cost of trip [" + trips[choice - 1].getTripId() + "]" + trips[choice -1].calculateTotalCost());
+        }
+    }
+
+    public static void predefinedScenario() {
+        System.out.println("\n      1. Creating... \n" +
+                "- 3 Clients \n" +
+                "- 3 Trips \n" +
+                "- 2 Objects of each Transportation Type \n" +
+                "- 2 Objects of each Accomodation Type");
+
+        //3 Clients
+        Client client1 = new Client("Jacob", "Delaire", "jacob.delaire@gmail.com");
+        Client client2 = new Client("Nathan", "Blo", "nathan.blo@gmail.com");
+        Client client3 = new Client("Mohammed", "Baouche", "mohammed.baouche@gmail.com");
+
+        //2 Flights
+        Flight flight1 = new Flight("Air Transat", "Montreal", "Fort Laudertale", 22);
+        Flight flight2 = new Flight("Air Canada", "Montreal", "Barcelona", 22);
+
+        //2 Buses
+        Bus bus1 = new Bus("Chartrand", "Fort Laudertale", "Miami", 30);
+        Bus bus2 = new Bus("Irizar", "Barcelona", "Marbella", 12);
+
+        //2 Trains
+        Train train1 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
+        Train train2 = new Train("Trans-Canada", "Montreal", "Vancouver", "TGV", "First Class");
+
+        //2 Hotels
+        Hotel hotel1 = new Hotel("Marriott", "Barcelona", 100, 4);
+        Hotel hotel2 = new Hotel("Hilton", "Miami", 65, 3);
+
+        //2 Hostels
+        Hostel hostel1 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
+        Hostel hostel2 = new Hostel("SleepInPeace", "Vancouver", 90, 3);
+
+        //3 Trips
+        Trip trip1 = new Trip("Vancouver", 14, 600, client1, hostel1, train1);
+        Trip trip2 = new Trip("Miami", 10, 400, client2, hotel2, bus1);
+        Trip trip3 = new Trip("Barcelona", 21, 900, client3, hotel1, flight2);
+
+        //Arrays for objects
+
+        //Clients Array (for 3 clients)
+        Client[] clientsPredef = {client1, client2, client3};
+
+        //Trips Array
+        Trip[] tripsPredef = {trip1, trip2, trip3};
+
+        //Transportation Array
+        Transportation[] transportationsPredef = {train1, train2, bus1, bus2, flight1, flight2};
+
+        //Accomodation Array
+        Accommodation[] accommodationsPredef = {hotel1, hotel2, hostel1, hostel2};
+
+        System.out.println("\n      2. Display all created objects\n");
+
+        System.out.println("Clients:");
+        for (Client client: clientsPredef) {
+            System.out.println("    " + client);
+        }
+
+        System.out.println("\nTrips:");
+        for (Trip trip: tripsPredef) {
+            System.out.println("    " + trip);
+        }
+
+        System.out.println("\nTransportation Options:");
+        for (Transportation transportation: transportationsPredef) {
+            System.out.println("    " + transportation);
+        }
+
+        System.out.println("\nAccommodations");
+        for (Accommodation accommodation: accommodationsPredef) {
+            System.out.println("    " + accommodation);
+        }
+
+        System.out.println("\n      3. Test of the equals method:\n");
+        System.out.println("-- Equals of a Flight and a Train");
+        System.out.println(flight1.equals(train1));
+        System.out.println("-- Equals of two Hotels (Different attributes)");
+        System.out.println(hotel1.equals(hotel2));
+        System.out.println("-- Equals of two Trains (Identical attributes)");
+        System.out.println(train1.equals(train2));
+
+        System.out.println("\n      4. Cost of the Trips\n");
+        for (Trip trip: tripsPredef) {
+            System.out.println(trip.getTripId() + ": " + trip.calculateTotalCost() + "$");
+        }
+
+        System.out.println("\n      5. Most expensive Trip\n" );
+        mostExpensiveTrip(tripsPredef);
+
+        System.out.println("\n      6. Deep copie of the Transportation Array\n");
+
+        System.out.println("Making the deep copy...\n");
+        Transportation[] transportationsCopy = copyTransportationArray(transportationsPredef);
+
+        System.out.println("-- Displaying both Arrays --\n");
+        System.out.println("Original");
+        for (Transportation transportation: transportationsPredef) {
+            System.out.println("    " + transportation);
+        }
+
+        System.out.println("\nCopy");
+        for (Transportation transportation: transportationsCopy) {
+            System.out.println("    " + transportation);
+        }
+
+        System.out.println("\nModify the copy Array...\n");
+        transportationsCopy[0].setCompanyName("Unknown Company");
+
+        System.out.println("-- Display both Arrays AFTER MODIFICATION --\n");
+
+        System.out.println("Original");
+        for (Transportation transportation: transportationsPredef) {
+            System.out.println("    " + transportation);
+        }
+
+        System.out.println("\nCopy");
+        for (Transportation transportation: transportationsCopy) {
+            System.out.println("    " + transportation);
+        }
+    }
+
+    public static int choiceCheckClient(String action, Boolean exitPossible) {
+        int choice;
+        int compteur = 0;
+
+        int maxChoice;
+
+        if (exitPossible) {
+            maxChoice = clients.length;
+        } else {
+            maxChoice = clients.length - 1;
+        }
+
+        System.out.println("\nWhich client do you want to " + action + ".");
+
+        do {
+            if (compteur > 0) {
+                System.out.println("Please enter a valid value...");
+            }
+            displayClients();
+
+            if (exitPossible)
+                System.out.println(clients.length + ". Exit");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            compteur++;
+        } while (choice < 0 || choice > maxChoice);
+
+        return choice;
+    }
+
+    public static int choiceCheckTrip(String action, Boolean exitPossible) {
+        int choice;
+        int compteur = 0;
+
+        int maxChoice;
+
+        if (exitPossible) {
+            maxChoice = trips.length;
+        } else {
+            maxChoice = trips.length - 1;
+        }
+
+        System.out.println("\nWhich trip do you want to " + action + ".");
+
+        do {
+            if (compteur > 0) {
+                System.out.println("Please enter a valid value...");
+            }
+            listAllTrips();
+
+            if (exitPossible)
+                System.out.println(trips.length + ". Exit");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            compteur++;
+        } while (choice < 0 || choice > maxChoice);
+
+        return choice;
+    }
+
+    public static int choiceCheckTransportation(String action, Boolean exitPossible) {
+        int choice;
+        int compteur = 0;
+
+        int maxChoice;
+
+        if (exitPossible) {
+            maxChoice = transportations.length;
+        } else {
+            maxChoice = transportations.length - 1;
+        }
+
+        System.out.println("\nWhich transportation do you want to " + action + ".");
+
+        do {
+            if (compteur > 0) {
+                System.out.println("Please enter a valid value...");
+            }
+
+            for (int i = 0; i < transportations.length; i++) {
+                System.out.println(i + ". " + transportations[i]);
+            }
+
+            if (exitPossible)
+                System.out.println(transportations.length + ". Exit");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            compteur++;
+        } while (choice < 0 || choice > maxChoice);
+
+        return choice;
+    }
+
+    public static int choiceCheckAccommodation(String action, Boolean exitPossible) {
+        int choice;
+        int compteur = 0;
+        int maxChoice;
+
+        if (exitPossible) {
+            maxChoice = accommodations.length;
+        } else {
+            maxChoice = accommodations.length - 1;
+        }
+
+        System.out.println("\nWhich accommodation do you want to " + action + ".");
+
+        do {
+            if (compteur > 0) {
+                System.out.println("Please enter a valid value...");
+            }
+
+            for (int i = 0; i < accommodations.length; i++) {
+                System.out.println(i + ". " + accommodations[i]);
+            }
+
+            if (exitPossible)
+                System.out.println(accommodations.length + ". Exit");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            compteur++;
+        } while (choice < 0 || choice > maxChoice);
+
+        return choice;
     }
 }
 

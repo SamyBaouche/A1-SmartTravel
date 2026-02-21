@@ -68,9 +68,7 @@ public abstract class  Transportation {
     public Transportation (Transportation other) {
 
         // Generate new unique ID
-        this.transportId = "TR" + idCounter;
-        idCounter++;
-
+        this.transportId = "TR" + idCounter++;
         this.companyName = other.companyName;
         this.departureCity = other.departureCity;
         this.arrivalCity = other.arrivalCity;
