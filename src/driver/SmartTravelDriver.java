@@ -5,6 +5,17 @@ import travel.*;
 
 import java.util.Scanner;
 
+//-----------------------------------------------------
+// Assignment 1
+// Question: 1 (only one)
+// Written by: Mohammed El Ouaabani 40338377, Samy Baouche 40336149
+//-----------------------------------------------------
+
+/**This code is a smart travel tool that helps the user manage clients, trips, transportations and accommodations
+ * in a simple way with a user friendly UI
+ * The user can also troubleshoot the driver and all the importants methods by choosing the predefined scenario options
+ */
+
 /**
  * SmartTravelDriver
  *
